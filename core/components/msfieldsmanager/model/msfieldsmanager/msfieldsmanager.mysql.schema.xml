@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model package="msfieldsmanager" baseClass="xPDOObject" platform="mysql" defaultEngine="MyISAM" version="1.1">
+	<object class="MsfmFields" table="msfm_fields" extends="xPDOSimpleObject">
+		<field key="fieldset_id" dbtype="int" precision="11" phptype="integer" null="false" default="0" index="index" />
+		<field key="name" dbtype="varchar" precision="255" phptype="string" null="false" />
+		<field key="title" dbtype="varchar" precision="255" phptype="string" null="false" />
+		<field key="description" dbtype="mediumtext" phptype="string" null="true" />
+		<field key="dbtype" dbtype="varchar" precision="255" phptype="string" null="false" />
+		<field key="dbprecision" dbtype="varchar" precision="255" phptype="string" null="true" />
+		<field key="dbnull" dbtype="tinyint" precision="1" phptype="boolean" null="false" default="0" />
+		<field key="dbdefault" dbtype="varchar" precision="255" phptype="string" null="true" />
+		<field key="xtype" dbtype="varchar" precision="255" phptype="string" null="false" />
+		<field key="extjs" dbtype="text" phptype="string" null="true" />
+		<field key="required" dbtype="tinyint" precision="1" phptype="boolean" null="false" default="0" />
+		<field key="enable" dbtype="tinyint" precision="1" phptype="boolean" null="false" default="1" />
+		<field key="rank" dbtype="int" precision="11" phptype="integer" null="false" default="0" />
+
+		<index alias="fieldset_id" name="fieldset_id" primary="false" unique="false" type="BTREE" >
+			<column key="fieldset_id" length="" collation="A" null="false" />
+		</index>
+		<aggregate alias="MsfmFieldset" class="MsfmFieldset" local="fieldset_id" foreign="id" cardinality="one" owner="foreign" />
+	</object>
+	<object class="MsfmFieldset" table="msfm_fieldset" extends="xPDOSimpleObject">
+		<field key="tab_id" dbtype="int" precision="11" phptype="integer" null="false" default="0" index="index" />
+		<field key="key" dbtype="varchar" precision="255" phptype="string" null="false" />
+		<field key="title" dbtype="varchar" precision="255" phptype="string" null="true" />
+		<field key="collapsible" dbtype="tinyint" precision="1" phptype="boolean" null="false" default="0" />
+		<field key="position" dbtype="tinyint" precision="1" phptype="integer" null="false" default="0" />
+		<field key="enable" dbtype="tinyint" precision="1" phptype="boolean" null="false" default="1" />
+		<field key="rank" dbtype="int" precision="11" phptype="integer" null="false" default="0" index="index" />
+
+		<index alias="rank" name="rank" primary="false" unique="false" type="BTREE" >
+			<column key="rank" length="" collation="A" null="false" />
+		</index>
+		<index alias="tab_id" name="tab_id" primary="false" unique="false" type="BTREE" >
+			<column key="tab_id" length="" collation="A" null="false" />
+		</index>
+		<aggregate alias="MsfmFields" class="MsfmFields" local="id" foreign="fieldset_id" cardinality="many" owner="local" />
+		<aggregate alias="MsfmTabs" class="MsfmTabs" local="tab_id" foreign="id" cardinality="one" owner="foreign" />
+	</object>
+	<object class="MsfmProcessors" table="msfm_processors" extends="xPDOSimpleObject">
+		<field key="name" dbtype="varchar" precision="255" phptype="string" null="false" />
+		<field key="table_name" dbtype="varchar" precision="255" phptype="string" null="false" />
+		<field key="processor" dbtype="text" phptype="string" null="false" />
+		<field key="display_field" dbtype="varchar" precision="255" phptype="string" null="true" />
+		<field key="value_field" dbtype="varchar" precision="255" phptype="string" null="true" />
+		<field key="sort_field" dbtype="varchar" precision="255" phptype="string" null="false" />
+	</object>
+	<object class="MsfmTabs" table="msfm_tabs" extends="xPDOSimpleObject">
+		<field key="key" dbtype="varchar" precision="255" phptype="string" null="false" />
+		<field key="title" dbtype="varchar" precision="255" phptype="string" null="false" />
+		<field key="enable" dbtype="tinyint" precision="1" phptype="boolean" null="false" default="1" />
+		<field key="rank" dbtype="int" precision="11" phptype="integer" null="false" default="0" index="index" />
+
+		<index alias="rank" name="rank" primary="false" unique="false" type="BTREE" >
+			<column key="rank" length="" collation="A" null="false" />
+		</index>
+		<aggregate alias="MsfmFieldset" class="MsfmFieldset" local="id" foreign="tab_id" cardinality="many" owner="local" />
+	</object>
+</model>

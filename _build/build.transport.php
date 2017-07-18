@@ -21,8 +21,8 @@ $sources = array(
     'build' => $root . '_build/',
     'data' => $root . '_build/data/',
     'resolvers' => $root . '_build/resolvers/',
-    'chunks' => $root . 'core/components/' . PKG_NAME_LOWER . '/elements/chunks/',
-    'snippets' => $root . 'core/components/' . PKG_NAME_LOWER . '/elements/snippets/',
+    //'chunks' => $root . 'core/components/' . PKG_NAME_LOWER . '/elements/chunks/',
+    //'snippets' => $root . 'core/components/' . PKG_NAME_LOWER . '/elements/snippets/',
     'plugins' => $root . 'core/components/' . PKG_NAME_LOWER . '/elements/plugins/',
     'lexicon' => $root . 'core/components/' . PKG_NAME_LOWER . '/lexicon/',
     'docs' => $root . 'core/components/' . PKG_NAME_LOWER . '/docs/',
@@ -175,37 +175,7 @@ $attr = array(
     xPDOTransport::RELATED_OBJECTS => true,
 );
 
-// add snippets
-if (defined('BUILD_SNIPPET_UPDATE')) {
-    $attr[xPDOTransport::RELATED_OBJECT_ATTRIBUTES]['Snippets'] = array(
-        xPDOTransport::PRESERVE_KEYS => false,
-        xPDOTransport::UPDATE_OBJECT => BUILD_SNIPPET_UPDATE,
-        xPDOTransport::UNIQUE_KEY => 'name',
-    );
-    $snippets = include $sources['data'] . 'transport.snippets.php';
-    if (!is_array($snippets)) {
-        $modx->log(modX::LOG_LEVEL_ERROR, 'Could not package in snippets.');
-    } else {
-        $category->addMany($snippets);
-        $modx->log(modX::LOG_LEVEL_INFO, 'Packaged in ' . count($snippets) . ' snippets.');
-    }
-}
 
-// add chunks
-if (defined('BUILD_CHUNK_UPDATE')) {
-    $attr[xPDOTransport::RELATED_OBJECT_ATTRIBUTES]['Chunks'] = array(
-        xPDOTransport::PRESERVE_KEYS => false,
-        xPDOTransport::UPDATE_OBJECT => BUILD_CHUNK_UPDATE,
-        xPDOTransport::UNIQUE_KEY => 'name',
-    );
-    $chunks = include $sources['data'] . 'transport.chunks.php';
-    if (!is_array($chunks)) {
-        $modx->log(modX::LOG_LEVEL_ERROR, 'Could not package in chunks.');
-    } else {
-        $category->addMany($chunks);
-        $modx->log(modX::LOG_LEVEL_INFO, 'Packaged in ' . count($chunks) . ' chunks.');
-    }
-}
 
 // add plugins
 if (defined('BUILD_PLUGIN_UPDATE')) {
@@ -262,7 +232,6 @@ $builder->setPackageAttributes(array(
     'changelog' => file_get_contents($sources['docs'] . 'changelog.txt'),
     'license' => file_get_contents($sources['docs'] . 'license.txt'),
     'readme' => file_get_contents($sources['docs'] . 'readme.txt'),
-    'chunks' => $BUILD_CHUNKS,
     'setup-options' => array(
         'source' => $sources['build'] . 'setup.options.php',
     ),

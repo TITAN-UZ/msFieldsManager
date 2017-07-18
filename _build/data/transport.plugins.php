@@ -4,15 +4,14 @@
 
 $plugins = array();
 
-$tmp = array(/*
+$tmp = array(
     'msFieldsManager' => array(
         'file' => 'msfieldsmanager',
         'description' => '',
         'events' => array(
-            'OnManagerPageInit' => array()
+            'OnDocFormRender' => array()
         )
     )
-    */
 );
 
 foreach ($tmp as $k => $v) {

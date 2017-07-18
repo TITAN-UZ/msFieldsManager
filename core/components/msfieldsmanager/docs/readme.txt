@@ -1,10 +1,10 @@
---------------------
-msFieldsManager
---------------------
-Author: John Doe <john@doe.com>
---------------------
+-------------------------------------------------------
+Extension: msFieldsManager for MODX Revolution 2.3.2-pl
+-------------------------------------------------------
+Version: 1.0.0-beta
+Released: November 22, 2015
+Since: November 22, 2015
+Author: Prihod
 
-A basic Extra for MODx Revolution.
-
-Feel free to suggest ideas/improvements/bugs on GitHub:
-http://github.com/username/msFieldsManager/issues
+Description
+    msFieldsManager

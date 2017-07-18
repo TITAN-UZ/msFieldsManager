@@ -6,8 +6,8 @@ $menus = array();
 
 $tmp = array(
     'msfieldsmanager' => array(
-        'description' => 'msfieldsmanager_menu_desc',
-        'action' => 'home',
+        'description' => 'Описание 555',
+        'action' => 'msfmfields',
         //'icon' => '<i class="icon icon-large icon-modx"></i>',
     ),
 );
