@@ -13,7 +13,12 @@ if ($transport->xpdo) {
             $modx->addPackage('msfieldsmanager', $modelPath);
 
             $manager = $modx->getManager();
-            $objects = array();
+            $objects = array(
+                'MsfmFields',
+                'MsfmFieldset',
+                'MsfmProcessors',
+                'MsfmTabs',
+            );
             $schemaFile = MODX_CORE_PATH . 'components/msfieldsmanager/model/schema/msfieldsmanager.mysql.schema.xml';
             if (is_file($schemaFile)) {
                 $schema = new SimpleXMLElement($schemaFile, 0, true);
